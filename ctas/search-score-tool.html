@@ -224,5 +224,56 @@
             <p class="meta"><strong>100% free.</strong> Results in under 60 seconds.</p>
         </div>
     </section>
+
+    <script>
+        /*
+         * Auto-height: tells the host page how tall this CTA needs to be so the
+         * iframe can be sized to fit with no inner scrollbar. Pairs with the
+         * listener snippet in embed/README.md. If the host page has no listener,
+         * nothing happens and the iframe keeps its CSS height.
+         */
+        (function () {
+            var card = document.querySelector('.ktv-cta');
+            if (!card || window.parent === window) return;
+
+            var lastHeight = 0;
+            var timer = null;
+
+            function measure() {
+                var body = getComputedStyle(document.body);
+                var borders = card.offsetHeight - card.clientHeight;
+                // +1px guards against sub-pixel rounding leaving a hairline of overflow
+                return Math.ceil(
+                    card.scrollHeight + borders +
+                    parseFloat(body.paddingTop) + parseFloat(body.paddingBottom)
+                ) + 1;
+            }
+
+            function send(force) {
+                var height = measure();
+                if (!height || (!force && height === lastHeight)) return;
+                lastHeight = height;
+                window.parent.postMessage({ type: 'ktv-cta-height', height: height }, '*');
+            }
+
+            function schedule() {
+                clearTimeout(timer);
+                timer = setTimeout(function () { send(false); }, 50);
+            }
+
+            window.addEventListener('load', schedule);
+            window.addEventListener('resize', schedule);
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+            if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(card);
+
+            window.addEventListener('message', function (e) {
+                if (e.source === window.parent && e.data && e.data.type === 'ktv-cta-height-request') {
+                    send(true);
+                }
+            });
+
+            schedule();
+        })();
+    </script>
 </body>
 </html>
