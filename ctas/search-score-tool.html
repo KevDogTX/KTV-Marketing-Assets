@@ -3,173 +3,226 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KTV Digital - AI Visibility Check</title>
+    <title>KTV Digital - SearchScore AI Visibility Check</title>
     <style>
+        :root {
+            --ink: #1D1D1F;
+            --ink-soft: #6E6E73;
+            --ink-muted: #86868B;
+            --surface: #FFFFFF;
+            --tile: #F5F5F7;
+            --hairline: rgba(0, 0, 0, 0.06);
+            --blue: #0066CC;
+            --blue-hover: #0057B0;
+            --orange: #FF6600;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         html, body { height: 100%; overflow: hidden; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
             background: transparent;
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 12px;
         }
 
         .ktv-cta {
             max-width: 900px;
             width: 100%;
-            padding: 30px;
-            background: #FFFFFF;
-            border: 1px solid #E0E0E0;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            max-height: 100%;
             overflow-y: auto;
-            max-height: 100vh;
+            padding: 44px 48px;
+            background: var(--surface);
+            border: 1px solid var(--hairline);
+            border-radius: 28px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 6px 20px rgba(0, 0, 0, 0.05);
+            color: var(--ink);
         }
 
-        .ktv-header {
-            display: flex;
+        /* Eyebrow */
+        .eyebrow {
+            display: inline-flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 18px;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: var(--ink-soft);
+            margin-bottom: 14px;
         }
 
-        .ktv-icon {
-            width: 45px;
-            height: 45px;
-            background: #0066CC;
+        .eyebrow-dot {
+            width: 8px;
+            height: 8px;
             border-radius: 50%;
+            background: var(--orange);
+            box-shadow: 0 0 0 4px rgba(255, 102, 0, 0.14);
+        }
+
+        /* Headline */
+        h2 {
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -0.025em;
+            color: var(--ink);
+            margin-bottom: 16px;
+            text-wrap: balance;
+        }
+
+        h2 .soft { color: var(--ink-muted); display: block; }
+
+        .lede {
+            font-size: 18px;
+            line-height: 1.5;
+            letter-spacing: -0.005em;
+            color: var(--ink-soft);
+            max-width: 680px;
+            margin-bottom: 28px;
+        }
+
+        .lede strong { color: var(--ink); font-weight: 600; }
+
+        /* Stat tiles */
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .stat {
             display: flex;
             align-items: center;
-            justify-content: center;
+            gap: 16px;
+            background: var(--tile);
+            border-radius: 18px;
+            padding: 18px 22px;
+        }
+
+        .stat-num {
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            line-height: 1;
+            color: var(--orange);
             flex-shrink: 0;
         }
 
-        .ktv-icon svg { width: 26px; height: 26px; }
-
-        h2 {
-            color: #1A1A1A;
-            font-size: 30px;
-            font-weight: 700;
-            line-height: 1.15;
-            margin: 0;
+        .stat-label {
+            font-size: 14px;
+            line-height: 1.4;
+            color: var(--ink-soft);
         }
 
-        .ktv-content {
-            color: #4A4A4A;
-            font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 18px;
-        }
-
-        .ktv-content p + p { margin-top: 10px; }
-
-        .stat-highlight { color: #FF6600; font-weight: 700; }
-        .brand-highlight { color: #0066CC; font-weight: 600; }
-
-        .tool-desc {
-            background: #F8F8F8;
-            border-left: 4px solid #FF6600;
-            padding: 12px 15px;
-            margin: 18px 0;
-            font-size: 15px;
-            line-height: 1.45;
-            color: #333;
-        }
-
-        .tool-desc strong { font-weight: 600; }
-
-        .ktv-actions {
+        /* Action row */
+        .actions {
             display: flex;
             align-items: center;
-            gap: 15px;
-            margin-bottom: 14px;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         .ktv-button {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background: #0066CC;
+            gap: 10px;
+            background: var(--blue);
             color: #FFFFFF;
             text-decoration: none;
-            padding: 14px 28px;
-            border-radius: 8px;
+            padding: 15px 28px;
+            border-radius: 980px;
             font-size: 17px;
             font-weight: 600;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 8px rgba(0, 102, 204, 0.25);
+            letter-spacing: -0.01em;
+            transition: background-color 0.2s ease, transform 0.2s ease;
         }
 
-        .ktv-button:hover,
+        .ktv-button svg {
+            width: 16px;
+            height: 16px;
+            transition: transform 0.2s ease;
+        }
+
+        .ktv-button:hover { background: var(--blue-hover); }
+        .ktv-button:hover svg { transform: translateX(3px); }
+        .ktv-button:active { transform: scale(0.98); }
+
         .ktv-button:focus-visible {
-            background: #0052A3;
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.35);
+            outline: 3px solid rgba(0, 102, 204, 0.4);
+            outline-offset: 3px;
         }
 
-        .ktv-button:focus-visible { outline: 3px solid #FF6600; outline-offset: 2px; }
-
-        .ktv-button svg { width: 18px; height: 18px; }
-
-        .free-badge {
-            background: #FF6600;
-            color: #FFFFFF;
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            white-space: nowrap;
-        }
-
-        .urgency {
-            color: #555;
+        .meta {
             font-size: 14px;
-            line-height: 1.45;
-            margin: 0;
+            line-height: 1.4;
+            color: var(--ink-soft);
         }
 
-        @media (max-width: 640px) {
-            .ktv-cta { padding: 20px; }
-            h2 { font-size: 23px; }
-            .ktv-button { padding: 12px 20px; font-size: 15px; }
-            .ktv-actions { flex-wrap: wrap; }
+        .meta strong { color: var(--ink); font-weight: 600; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ktv-button, .ktv-button svg { transition: none; }
+            .ktv-button:hover svg, .ktv-button:active { transform: none; }
+        }
+
+        @media (max-width: 720px) {
+            .ktv-cta { padding: 32px 28px; border-radius: 24px; }
+            h2 { font-size: 32px; }
+            .lede { font-size: 17px; }
+        }
+
+        @media (max-width: 520px) {
+            body { padding: 8px; }
+            .ktv-cta { padding: 26px 20px; border-radius: 22px; }
+            h2 { font-size: 27px; }
+            .lede { font-size: 16px; margin-bottom: 22px; }
+            .stats { grid-template-columns: 1fr; gap: 10px; margin-bottom: 24px; }
+            .stat { padding: 14px 18px; }
+            .stat-num { font-size: 28px; min-width: 84px; }
+            .actions { gap: 12px; }
+            .ktv-button { width: 100%; justify-content: center; }
+            .meta { width: 100%; text-align: center; }
         }
     </style>
 </head>
 <body>
-    <div class="ktv-cta">
-        <div class="ktv-header">
-            <div class="ktv-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="white">
-                    <path d="M12 2C8.14 2 5 5.14 5 9C5 11.38 6.19 13.47 8 14.74V17C8 17.55 8.45 18 9 18H15C15.55 18 16 17.55 16 17V14.74C17.81 13.47 19 11.38 19 9C19 5.14 15.86 2 12 2M9 21C9 21.55 9.45 22 10 22H14C14.55 22 15 21.55 15 21V20H9V21M12 4C14.76 4 17 6.24 17 9C17 10.88 16.12 12.54 14.78 13.53L14 14.17V16H10V14.17L9.22 13.53C7.88 12.54 7 10.88 7 9C7 6.24 9.24 4 12 4Z"/>
-                </svg>
+    <section class="ktv-cta" aria-labelledby="ktv-cta-title">
+        <p class="eyebrow"><span class="eyebrow-dot" aria-hidden="true"></span>Free AI Visibility Check</p>
+
+        <h2 id="ktv-cta-title">
+            Buyers are asking AI who to hire.
+            <span class="soft">Does it name you?</span>
+        </h2>
+
+        <p class="lede">ChatGPT, Perplexity, Gemini, and Claude build the shortlist before anyone visits your site. <strong>SearchScore</strong> shows whether you&rsquo;re on it, and which gaps to close first.</p>
+
+        <div class="stats">
+            <div class="stat">
+                <span class="stat-num">50%+</span>
+                <span class="stat-label">of B2B buyers start complex purchases in an AI tool</span>
             </div>
-            <h2>When Buyers Ask AI Who to Hire, Are You Recommended?</h2>
+            <div class="stat">
+                <span class="stat-num">60%</span>
+                <span class="stat-label">of searches now end without a single website click</span>
+            </div>
         </div>
 
-        <div class="ktv-content">
-            <p><span class="stat-highlight">Over 50%</span> of B2B buyers making complex purchases start their research in <span class="brand-highlight">ChatGPT</span>, <span class="brand-highlight">Perplexity</span>, <span class="brand-highlight">Gemini</span>, or <span class="brand-highlight">Claude</span>. <span class="stat-highlight">60%</span> of searches now end without a single website click.</p>
-            <p>AI builds the shortlist before anyone visits your site. The companies it names get the call. Companies it skips never know they were in the running.</p>
-        </div>
-
-        <div class="tool-desc">
-            <strong>The Search Score Tool</strong> shows how visible your business is to AI search engines today and which gaps to close first, so your name is on the list when your next customer asks.
-        </div>
-
-        <div class="ktv-actions">
+        <div class="actions">
             <a href="https://searchscore.ktvdigital.com/?utm_source=ktvdigital&utm_medium=iframe&utm_campaign=search-score-cta" target="_blank" rel="noopener" class="ktv-button">
-                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/>
+                Get your free score
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 8h10M9 4l4 4-4 4"/>
                 </svg>
-                See Your AI Visibility Score
             </a>
-            <span class="free-badge">100% FREE</span>
+            <p class="meta"><strong>100% free.</strong> Results in under 60 seconds.</p>
         </div>
-
-        <p class="urgency">Takes under 60 seconds. AI models learn from existing authority signals, so businesses that act first build the lead.</p>
-    </div>
+    </section>
 </body>
 </html>
