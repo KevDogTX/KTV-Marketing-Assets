@@ -49,7 +49,7 @@ the browser default of 300×150px inside an empty box.
 Paste this where the CTA should appear. Never put CSS inside this `<div>`.
 
 ```html
-<div class="ktv-iframe-wrapper"><iframe src="https://kevdogtx.github.io/KTV-Marketing-Assets/ctas/search-score-tool.html" loading="lazy" title="AI Visibility SearchScore Tool"></iframe></div>
+<div class="ktv-iframe-wrapper"><iframe src="https://kevdogtx.github.io/KTV-Marketing-Assets/ctas/search-score-tool.html" loading="lazy" title="AI SearchScore: Free AI Visibility Score"></iframe></div>
 ```
 
 ## Box heights (what each CTA must fit)
@@ -68,6 +68,47 @@ desktop.
 1000px. Its tallest fit leaves 23px to spare. If you change a CTA's copy or
 layout, check it again at those widths, especially 280px, 560px and 728px, which
 are the tightest.
+
+## Slim mid-article CTA (`search-score-inline.html`)
+
+A short strip version of the AI SearchScore CTA, meant to sit about 40% of the way
+into a post. It needs a shorter box, so it adds a second class,
+`ktv-iframe-slim`, to the same wrapper. All the Part 1 CSS still applies; the
+rules below only change the height and spacing.
+
+Add this to EComposer → **Custom CSS**, below the Part 1 rules:
+
+```css
+.ktv-iframe-wrapper.ktv-iframe-slim {
+  height: 190px;
+  margin: 32px 0;
+}
+
+@media (max-width: 600px) {
+  .ktv-iframe-wrapper.ktv-iframe-slim { height: 220px; }
+}
+
+@media (max-width: 520px) {
+  .ktv-iframe-wrapper.ktv-iframe-slim { height: 250px; }
+}
+```
+
+Embed code (paste between two paragraphs, about 40% of the way down the post):
+
+```html
+<div class="ktv-iframe-wrapper ktv-iframe-slim"><iframe src="https://kevdogtx.github.io/KTV-Marketing-Assets/ctas/search-score-inline.html" loading="lazy" title="AI SearchScore: Free AI Visibility Score"></iframe></div>
+```
+
+| Window width | Box height | Tallest CTA | Spare |
+|---|---|---|---|
+| 601px and wider | 190px | 164px | 26px |
+| 521–600px | 220px | 197px | 23px |
+| 520px and narrower | 250px | 228px | 22px |
+
+These were checked at every iframe width from 260px to 1000px. The layout sits
+side by side above 520px iframe width and stacks below it. Its link uses
+`utm_campaign=search-score-cta-inline`, so its clicks can be told apart from
+the end-of-post CTA.
 
 ## Troubleshooting
 

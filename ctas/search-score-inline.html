@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KTV Digital - AI SearchScore Inline CTA</title>
+    <!--
+        Slim, mid-article version of ctas/search-score-tool.html (AI SearchScore).
+        Meant to sit around the 40% mark of a blog post, so it is short and
+        quiet: one headline, one line of copy, one button. Embed it in a
+        .ktv-iframe-wrapper.ktv-iframe-slim box (see embed/README.md).
+    -->
+    <style>
+        :root {
+            --ink: #1D1D1F;
+            --ink-soft: #6E6E73;
+            --surface: #FFFFFF;
+            --hairline: rgba(0, 0, 0, 0.06);
+            --blue: #0066CC;
+            --blue-hover: #0057B0;
+            --orange: #FF6600;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body { height: 100%; overflow: hidden; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+        }
+
+        .ktv-cta {
+            width: 100%;
+            max-height: 100%;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 20px 24px 20px 28px;
+            background: var(--surface);
+            border: 1px solid var(--hairline);
+            border-left: 4px solid var(--orange);
+            border-radius: 18px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 4px 14px rgba(0, 0, 0, 0.04);
+            color: var(--ink);
+        }
+
+        .copy { flex: 1; min-width: 0; }
+
+        .eyebrow {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 4px;
+        }
+
+        h2 {
+            font-size: 21px;
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            color: var(--ink);
+            margin-bottom: 4px;
+            text-wrap: balance;
+        }
+
+        .lede {
+            font-size: 15px;
+            line-height: 1.45;
+            color: var(--ink-soft);
+            text-wrap: balance;
+        }
+
+        .ktv-button {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: var(--blue);
+            color: #FFFFFF;
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 980px;
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+            transition: background-color 0.2s ease, transform 0.2s ease;
+        }
+
+        .ktv-button svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.2s ease;
+        }
+
+        .ktv-button:hover { background: var(--blue-hover); }
+        .ktv-button:hover svg { transform: translateX(3px); }
+        .ktv-button:active { transform: scale(0.98); }
+
+        .ktv-button:focus-visible {
+            outline: 3px solid rgba(0, 102, 204, 0.4);
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ktv-button, .ktv-button svg { transition: none; }
+            .ktv-button:hover svg, .ktv-button:active { transform: none; }
+        }
+
+        /* Narrow side-by-side: tighten so the copy column doesn't wrap to 4 lines */
+        @media (max-width: 780px) {
+            .ktv-cta { gap: 18px; padding: 18px 20px 18px 22px; }
+            h2 { font-size: 19px; }
+            .lede { font-size: 14px; }
+            .ktv-button { padding: 11px 18px; font-size: 15px; }
+        }
+
+        /* Stack below ~520px iframe width: copy on top, full-width button */
+        @media (max-width: 520px) {
+            .ktv-cta {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 14px;
+                padding: 18px 20px 20px 22px;
+                border-radius: 16px;
+            }
+            h2 { font-size: 19px; }
+            .lede { font-size: 14px; }
+            .ktv-button { width: 100%; }
+        }
+
+        @media (max-width: 360px) {
+            body { padding: 6px; }
+            .ktv-cta { padding: 16px 16px 18px 18px; gap: 12px; }
+            h2 { font-size: 18px; }
+            .ktv-button { padding: 11px 18px; font-size: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <aside class="ktv-cta" aria-labelledby="ktv-cta-title">
+        <div class="copy">
+            <p class="eyebrow">Free AI Visibility Score</p>
+            <h2 id="ktv-cta-title">Is AI recommending you, or your competitors?</h2>
+            <p class="lede">AI SearchScore checks ChatGPT, Perplexity, Gemini, and Claude in 60 seconds.</p>
+        </div>
+
+        <a href="https://searchscore.ktvdigital.com/?utm_source=ktvdigital&utm_medium=iframe&utm_campaign=search-score-cta-inline" target="_blank" rel="noopener" class="ktv-button">
+            Get your free score
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+        </a>
+    </aside>
+
+    <script>
+        /*
+         * Auto-height: same as ctas/search-score-tool.html. Tells the host page
+         * how tall this CTA needs to be. Does nothing unless the host page runs
+         * the listener in embed/README.md.
+         */
+        (function () {
+            var card = document.querySelector('.ktv-cta');
+            if (!card || window.parent === window) return;
+
+            var lastHeight = 0;
+            var timer = null;
+
+            function measure() {
+                var body = getComputedStyle(document.body);
+                var borders = card.offsetHeight - card.clientHeight;
+                return Math.ceil(
+                    card.scrollHeight + borders +
+                    parseFloat(body.paddingTop) + parseFloat(body.paddingBottom)
+                ) + 1;
+            }
+
+            function send(force) {
+                var height = measure();
+                if (!height || (!force && height === lastHeight)) return;
+                lastHeight = height;
+                window.parent.postMessage({ type: 'ktv-cta-height', height: height }, '*');
+            }
+
+            function schedule() {
+                clearTimeout(timer);
+                timer = setTimeout(function () { send(false); }, 50);
+            }
+
+            window.addEventListener('load', schedule);
+            window.addEventListener('resize', schedule);
+            if (document.fonts && document.fonts.ready) document.fonts.ready.then(schedule);
+            if ('ResizeObserver' in window) new ResizeObserver(schedule).observe(card);
+
+            window.addEventListener('message', function (e) {
+                if (e.source === window.parent && e.data && e.data.type === 'ktv-cta-height-request') {
+                    send(true);
+                }
+            });
+
+            schedule();
+        })();
+    </script>
+</body>
+</html>
