@@ -23,35 +23,17 @@ Setup has two parts, and they go in **two different places**:
 
 ## 1. CSS (EComposer → Custom CSS)
 
-All three rules are required. If the last rule is missing, the iframe shrinks to
-the browser default of 300×150px inside an empty box.
+The CSS lives in [`shopify-custom.css`](shopify-custom.css), the source of truth
+for what should be in EComposer. Paste the whole file into EComposer → **Custom
+CSS**, replacing any older `.ktv-iframe-wrapper` rules there. It covers both the
+standard box and the slim box.
 
-```css
-.ktv-iframe-wrapper {
-  position: relative;
-  height: 530px;
-  overflow: hidden;
-  border-radius: 8px;
-  margin: 40px 0;
-}
+To change a box height or spacing, edit `shopify-custom.css`, commit it, and
+then paste the updated file into EComposer. Don't edit the CSS only in EComposer,
+or the repo stops matching the live site.
 
-@media (max-width: 600px) {
-  .ktv-iframe-wrapper { height: 600px; }
-}
-
-@media (max-width: 420px) {
-  .ktv-iframe-wrapper { height: 700px; }
-}
-
-.ktv-iframe-wrapper iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-```
+Every rule is required. If the `.ktv-iframe-wrapper iframe` rule is missing, the
+iframe shrinks to the browser default of 300×150px inside an empty box.
 
 ## 2. Embed code (article HTML, per post)
 
@@ -82,25 +64,9 @@ are the tightest.
 
 A short strip version of the AI SearchScore CTA, meant to sit about 40% of the way
 into a post. It needs a shorter box, so it adds a second class,
-`ktv-iframe-slim`, to the same wrapper. All the Part 1 CSS still applies; the
-rules below only change the height and spacing.
-
-Add this to EComposer → **Custom CSS**, below the Part 1 rules:
-
-```css
-.ktv-iframe-wrapper.ktv-iframe-slim {
-  height: 190px;
-  margin: 32px 0;
-}
-
-@media (max-width: 600px) {
-  .ktv-iframe-wrapper.ktv-iframe-slim { height: 220px; }
-}
-
-@media (max-width: 520px) {
-  .ktv-iframe-wrapper.ktv-iframe-slim { height: 250px; }
-}
-```
+`ktv-iframe-slim`, to the same wrapper. Its rules are at the bottom of
+[`shopify-custom.css`](shopify-custom.css) and only change the height and
+spacing. Everything else comes from the standard box rules.
 
 Embed code (paste between two paragraphs, about 40% of the way down the post):
 
@@ -123,8 +89,9 @@ the end-of-post CTA.
 
 | Symptom | Cause | Fix |
 |---|---|---|
-| Scrollbar inside the CTA | Box shorter than the CTA at that width | Check the CSS above is in Custom CSS; tighten the CTA's layout at that width |
-| Small 300×150 CTA in a big empty box | `.ktv-iframe-wrapper iframe` rule missing | Add the last rule from Part 1 back to Custom CSS |
+| Scrollbar inside the CTA | Box shorter than the CTA at that width | Check that EComposer Custom CSS matches `shopify-custom.css`; tighten the CTA's layout at that width |
+| Slim CTA sits in a tall, mostly empty box | Slim rules missing from Custom CSS | Paste the full `shopify-custom.css` into Custom CSS |
+| Small 300×150 CTA in a big empty box | `.ktv-iframe-wrapper iframe` rule missing | Paste the full `shopify-custom.css` into Custom CSS |
 | CSS text shows on the page where the CTA should be | CSS was pasted into the article instead of Custom CSS | Replace the article's wrapper with the Part 2 embed code |
 | Text and an extra CTA appear above the site header | Non-JavaScript content in EComposer Custom JS | Empty the Custom JS field |
 

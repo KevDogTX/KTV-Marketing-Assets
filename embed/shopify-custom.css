@@ -1,0 +1,49 @@
+/*
+ * KTV CTA iframe boxes: source of truth for EComposer → Custom CSS.
+ *
+ * Paste this whole file into EComposer → Custom CSS, replacing any older
+ * .ktv-iframe-wrapper rules there. Edit it here first, commit, then paste.
+ * Never paste it into a blog article. See embed/README.md.
+ */
+
+/* Standard box: end-of-post CTA (ctas/search-score-tool.html) */
+.ktv-iframe-wrapper {
+  position: relative;
+  height: 530px;
+  overflow: hidden;
+  border-radius: 8px;
+  margin: 40px 0;
+}
+
+@media (max-width: 600px) {
+  .ktv-iframe-wrapper { height: 600px; }
+}
+
+@media (max-width: 420px) {
+  .ktv-iframe-wrapper { height: 700px; }
+}
+
+/* Required: without it the iframe shrinks to 300x150px inside an empty box */
+.ktv-iframe-wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Slim box: mid-article CTA (ctas/search-score-inline.html).
+   Must stay below the rules above; the extra class makes these win. */
+.ktv-iframe-wrapper.ktv-iframe-slim {
+  height: 190px;
+  margin: 32px 0;
+}
+
+@media (max-width: 600px) {
+  .ktv-iframe-wrapper.ktv-iframe-slim { height: 220px; }
+}
+
+@media (max-width: 520px) {
+  .ktv-iframe-wrapper.ktv-iframe-slim { height: 250px; }
+}
