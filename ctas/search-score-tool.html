@@ -178,7 +178,7 @@
             .lede { font-size: 17px; }
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 660px) {
             body { padding: 8px; }
             .ktv-cta { padding: 26px 20px; border-radius: 22px; }
             h2 { font-size: 27px; }
@@ -200,8 +200,13 @@
             .stat { padding: 12px 14px; gap: 12px; }
             .stat-num { font-size: 24px; min-width: 66px; }
             .stat-label { font-size: 13px; }
-            .ktv-button { padding: 13px 20px; font-size: 16px; }
+            .ktv-button { padding: 13px 14px; font-size: 15px; gap: 8px; white-space: nowrap; }
             .meta { font-size: 13px; }
+        }
+
+        /* Smallest phones: drop the arrow so the label stays on one line */
+        @media (max-width: 290px) {
+            .ktv-button svg { display: none; }
         }
     </style>
 </head>
@@ -214,7 +219,7 @@
             <span class="soft">Does it name you?</span>
         </h2>
 
-        <p class="lede">ChatGPT, Perplexity, Gemini, and Claude build the shortlist before anyone visits your site. <strong>AI SearchScore</strong> shows whether you&rsquo;re on it, and which gaps to close first.</p>
+        <p class="lede">ChatGPT, Perplexity, Gemini, and Claude build the shortlist before anyone visits your site. <strong>AI&nbsp;SearchScore</strong> shows whether you&rsquo;re on it, and which gaps to close first.</p>
 
         <div class="stats">
             <div class="stat">
@@ -229,7 +234,7 @@
 
         <div class="actions">
             <a href="https://searchscore.ktvdigital.com/?utm_source=ktvdigital&utm_medium=iframe&utm_campaign=search-score-cta" target="_blank" rel="noopener" class="ktv-button">
-                Get your free score
+                Get your AI SearchScore
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4"/>
                 </svg>

@@ -126,6 +126,14 @@
             .ktv-button { padding: 11px 18px; font-size: 15px; }
         }
 
+        /* Tightest side-by-side range: keep the copy column from wrapping to 4 lines */
+        @media (max-width: 640px) {
+            .ktv-cta { gap: 14px; padding: 16px 18px 16px 20px; }
+            h2 { font-size: 18px; }
+            .ktv-button { padding: 10px 16px; font-size: 14px; gap: 6px; }
+            .ktv-button svg { display: none; }
+        }
+
         /* Stack below ~520px iframe width: copy on top, full-width button */
         @media (max-width: 520px) {
             .ktv-cta {
@@ -137,7 +145,8 @@
             }
             h2 { font-size: 19px; }
             .lede { font-size: 14px; }
-            .ktv-button { width: 100%; }
+            .ktv-button { width: 100%; padding: 11px 18px; font-size: 15px; gap: 8px; }
+            .ktv-button svg { display: inline-block; }
         }
 
         @media (max-width: 360px) {
@@ -153,7 +162,7 @@
         <div class="copy">
             <p class="eyebrow">Free AI Visibility Score</p>
             <h2 id="ktv-cta-title">Is AI recommending you, or your competitors?</h2>
-            <p class="lede">AI SearchScore checks ChatGPT, Perplexity, Gemini, and Claude in 60 seconds.</p>
+            <p class="lede">AI&nbsp;SearchScore checks ChatGPT, Perplexity, Gemini, and Claude in 60 seconds.</p>
         </div>
 
         <a href="https://searchscore.ktvdigital.com/?utm_source=ktvdigital&utm_medium=iframe&utm_campaign=search-score-cta-inline" target="_blank" rel="noopener" class="ktv-button">

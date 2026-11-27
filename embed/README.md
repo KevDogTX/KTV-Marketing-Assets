@@ -60,8 +60,8 @@ desktop.
 | 420px and narrower | 700px |
 
 `search-score-tool.html` has been checked at every iframe width from 260px to
-1000px. Its tallest fit leaves 23px to spare. If you change a CTA's copy or
-layout, check it again at those widths, especially 280px, 560px and 728px, which
+1000px. Its tallest fit leaves 25px to spare. If you change a CTA's copy or
+layout, check it again at those widths, especially 260px, 382px and 562px, which
 are the tightest.
 
 ## Slim mid-article CTA (`search-score-inline.html`)
