@@ -1,9 +1,18 @@
 # Embedding KTV CTAs
 
-CTAs in `ctas/` are served from GitHub Pages and embedded in ktvdigital.com blog
-posts as iframes inside a `.ktv-iframe-wrapper` box. The box has a fixed height
-per screen size, set in Shopify. Each CTA must fit inside that box without a
-scrollbar.
+CTAs in `ctas/` are served from GitHub Pages at **`https://cta.ktvdigital.com`**
+and embedded in ktvdigital.com blog posts as iframes inside a
+`.ktv-iframe-wrapper` box. The box has a fixed height per screen size, set in
+Shopify. Each CTA must fit inside that box without a scrollbar.
+
+Always embed with `cta.ktvdigital.com` URLs. Older posts that use
+`kevdogtx.github.io/KTV-Marketing-Assets/...` still work, because GitHub
+redirects them to the custom domain, but update them when you edit those posts.
+
+The domain comes from the `CNAME` file at the repo root plus a DNS record at
+Directnic (`cta` → CNAME → `kevdogtx.github.io`). Don't delete, rename or edit
+either one, or every embedded CTA stops loading. Don't rename or move files in
+`ctas/` either, since each file's URL is embedded in live posts.
 
 Setup has two parts, and they go in **two different places**:
 
@@ -49,7 +58,7 @@ the browser default of 300×150px inside an empty box.
 Paste this where the CTA should appear. Never put CSS inside this `<div>`.
 
 ```html
-<div class="ktv-iframe-wrapper"><iframe src="https://kevdogtx.github.io/KTV-Marketing-Assets/ctas/search-score-tool.html" loading="lazy" title="AI SearchScore: Free AI Visibility Score"></iframe></div>
+<div class="ktv-iframe-wrapper"><iframe src="https://cta.ktvdigital.com/ctas/search-score-tool.html" loading="lazy" title="AI SearchScore: Free AI Visibility Score"></iframe></div>
 ```
 
 ## Box heights (what each CTA must fit)
@@ -96,7 +105,7 @@ Add this to EComposer → **Custom CSS**, below the Part 1 rules:
 Embed code (paste between two paragraphs, about 40% of the way down the post):
 
 ```html
-<div class="ktv-iframe-wrapper ktv-iframe-slim"><iframe src="https://kevdogtx.github.io/KTV-Marketing-Assets/ctas/search-score-inline.html" loading="lazy" title="AI SearchScore: Free AI Visibility Score"></iframe></div>
+<div class="ktv-iframe-wrapper ktv-iframe-slim"><iframe src="https://cta.ktvdigital.com/ctas/search-score-inline.html" loading="lazy" title="AI SearchScore: Free AI Visibility Score"></iframe></div>
 ```
 
 | Window width | Box height | Tallest CTA | Spare |
@@ -132,7 +141,7 @@ breaks every blog page.
 
 ```js
 (function () {
-  var ORIGIN = 'https://kevdogtx.github.io';
+  var ORIGIN = 'https://cta.ktvdigital.com';
 
   function frames() {
     return document.querySelectorAll('.ktv-iframe-wrapper iframe');
@@ -165,7 +174,7 @@ breaks every blog page.
 After saving, open a blog post and confirm nothing appears above the header. If
 anything does, empty the Custom JS field right away.
 
-The listener only accepts messages from `https://kevdogtx.github.io` and only
+The listener only accepts messages from `https://cta.ktvdigital.com` and only
 resizes the iframe that sent the message. To make another CTA report its height,
 copy the auto-height `<script>` block from the bottom of
 `ctas/search-score-tool.html` into it.
