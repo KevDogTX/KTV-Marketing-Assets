@@ -18,15 +18,19 @@ Setup has two parts, and they go in **two different places**:
 
 | What | Where it goes |
 |---|---|
-| 1. CSS | EComposer → **Custom CSS** (shared by every blog post) |
-| 2. Embed code | The blog article's HTML view (`<>` button), once per post |
+| 1. CSS | EComposer → **Custom CSS** (loads on every page, including posts written in the Shopify editor) |
+| 2. Embed code | Shopify admin → the blog post → **Show HTML** (`<>` button) in the editor, once per post |
 
 ## 1. CSS (EComposer → Custom CSS)
 
 The CSS lives in [`shopify-custom.css`](shopify-custom.css), the source of truth
-for what should be in EComposer. Paste the whole file into EComposer → **Custom
-CSS**, replacing any older `.ktv-iframe-wrapper` rules there. It covers both the
-standard box and the slim box.
+for the CTA rules in EComposer. It covers both the standard box and the slim box.
+
+EComposer's Custom CSS field also holds the rest of the blog styling
+(`.ktv-hero`, `.ktv-section`, `.ktv-takeaways` and others). **Don't clear the
+field.** Find the existing `.ktv-iframe-wrapper` rules, select from
+`.ktv-iframe-wrapper {` through the end of the `.ktv-iframe-wrapper iframe { … }`
+rule, and paste the file's contents over just that part.
 
 To change a box height or spacing, edit `shopify-custom.css`, commit it, and
 then paste the updated file into EComposer. Don't edit the CSS only in EComposer,

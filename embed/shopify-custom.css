@@ -1,9 +1,13 @@
 /*
  * KTV CTA iframe boxes: source of truth for EComposer → Custom CSS.
  *
- * Paste this whole file into EComposer → Custom CSS, replacing any older
- * .ktv-iframe-wrapper rules there. Edit it here first, commit, then paste.
- * Never paste it into a blog article. See embed/README.md.
+ * EComposer's Custom CSS loads on every page, including blog posts written
+ * in the Shopify editor. That field also holds other blog styles (.ktv-hero,
+ * .ktv-section, etc.). Do NOT clear the field. Replace only the existing
+ * .ktv-iframe-wrapper rules with this file's contents.
+ *
+ * Edit it here first, commit, then paste. Never paste it into a blog
+ * article. See embed/README.md.
  */
 
 /* Standard box: end-of-post CTA (ctas/search-score-tool.html) */
